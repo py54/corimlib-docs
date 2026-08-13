@@ -1,6 +1,6 @@
 # CorimLib Documentation
 
-Developer documentation for [CorimLib](https://github.com/py54/corimlib), a cross-loader GUI/HUD/feature framework for Fabric, NeoForge, and Forge Minecraft mods. Built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and deployed to GitHub Pages via GitHub Actions.
+Developer documentation for **CorimLib**, a cross-loader GUI/HUD/feature framework for Fabric, NeoForge, and Forge Minecraft mods. Built with [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and deployed to GitHub Pages via GitHub Actions.
 
 **This repository contains only documentation — no CorimLib source code.** The main CorimLib repository is private; this site documents its public API (verified directly against the real source) without reproducing it.
 

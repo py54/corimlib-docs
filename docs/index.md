@@ -2,7 +2,7 @@
 
 **CorimLib** is a small, cross-loader Java library for Minecraft client mods. It gives you one `Feature`/`Setting` toggle framework, one JSON config/profile system, one HUD-line system, and a themed GUI — written once, and driven on Fabric, NeoForge, and Forge through a single `PlatformBridge` interface instead of per-loader `if` branches or a bytecode-remapping toolchain like Architectury.
 
-It's the library that powers [Crunch](https://github.com/py54/crunch), a client-side QoL/HUD/visual/performance mod, and was extracted out of Crunch's own codebase mid-project — the package names still say `dev.py54.crunch`, and a few of the shipped GUI screens are literally Crunch's own menu. This site documents CorimLib as it actually exists today, including which parts are genuinely reusable by another mod and which parts are Crunch's own concrete implementation that happens to ship in the same jar. See [Limitations & Experimental APIs](reference/limitations.md) before you build on anything non-obvious.
+It's the library that powers **Crunch**, a client-side QoL/HUD/visual/performance mod, and was extracted out of Crunch's own codebase mid-project — the package names still say `dev.py54.crunch`, and a few of the shipped GUI screens are literally Crunch's own menu. This site documents CorimLib as it actually exists today, including which parts are genuinely reusable by another mod and which parts are Crunch's own concrete implementation that happens to ship in the same jar. See [Limitations & Experimental APIs](reference/limitations.md) before you build on anything non-obvious.
 
 ## Why CorimLib exists
 
