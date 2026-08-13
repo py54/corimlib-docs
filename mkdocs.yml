@@ -1,0 +1,98 @@
+site_name: CorimLib
+site_description: Cross-loader GUI/HUD/feature framework for Fabric, NeoForge, and Forge Minecraft mods.
+site_url: https://py54.github.io/corimlib-docs/
+repo_url: https://github.com/py54/corimlib-docs
+repo_name: py54/corimlib-docs
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+  favicon: assets/favicon.svg
+  logo: assets/logo.svg
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+extra_css:
+  - assets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/py54
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Gradle Setup: getting-started/gradle-setup.md
+      - Loader Setup:
+          - Fabric: getting-started/fabric-setup.md
+          - NeoForge: getting-started/neoforge-setup.md
+          - Forge: getting-started/forge-setup.md
+  - Core Concepts:
+      - Architecture Overview: core/architecture.md
+      - PlatformBridge API: core/platform-bridge.md
+      - Features & Settings: core/features-and-settings.md
+      - Config System: core/config-system.md
+  - HUD System: hud/hud-system.md
+  - GUI & Theming: gui/gui-and-theming.md
+  - Events, Keybinds, Tooltips & Chat: events/events-keybinds-tooltips-chat.md
+  - "Guide: Build a Simple Mod": guide/build-a-simple-mod.md
+  - Reference:
+      - API Reference: reference/api-reference.md
+      - Supported Versions & Loaders: reference/supported-versions.md
+      - Limitations & Experimental APIs: reference/limitations.md

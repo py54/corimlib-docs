@@ -1,0 +1,19 @@
+/* Match CorimLib's own CrunchTheme accent color (#3b82f6) instead of a generic palette name. */
+:root, [data-md-color-scheme="default"] {
+  --md-primary-fg-color: #3b82f6;
+  --md-primary-fg-color--light: #60a5fa;
+  --md-primary-fg-color--dark: #2563eb;
+  --md-accent-fg-color: #3b82f6;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #3b82f6;
+  --md-primary-fg-color--light: #60a5fa;
+  --md-primary-fg-color--dark: #2563eb;
+  --md-accent-fg-color: #60a5fa;
+  --md-default-bg-color: #0f1115;
+}
+
+.md-header {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+}
