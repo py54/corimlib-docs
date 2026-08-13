@@ -4,6 +4,7 @@ site_url: https://py54.github.io/corimlib-docs/
 repo_url: https://github.com/py54/corimlib-docs
 repo_name: py54/corimlib-docs
 edit_uri: edit/main/docs/
+copyright: "Copyright &copy; 2026 py54. All rights reserved. CorimLib is proprietary software — see <a href=\"license/\">License</a>."
 
 theme:
   name: material
@@ -96,3 +97,4 @@ nav:
       - API Reference: reference/api-reference.md
       - Supported Versions & Loaders: reference/supported-versions.md
       - Limitations & Experimental APIs: reference/limitations.md
+  - License: license.md

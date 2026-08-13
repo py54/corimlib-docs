@@ -16,3 +16,7 @@ Then open <http://127.0.0.1:8000>.
 ## Deployment
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site with MkDocs and deploys it to GitHub Pages automatically.
+
+## License
+
+CorimLib is proprietary software under a custom license — see [LICENSE.md](LICENSE.md) or the [rendered License page](https://py54.github.io/corimlib-docs/license/).
