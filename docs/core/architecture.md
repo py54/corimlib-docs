@@ -20,9 +20,9 @@ graph TD
 
 - **`common`** — the loader-agnostic core: `Feature`/`Setting`/`FeatureRegistry`/`Category`, JSON config (`ConfigManager`), profiles (`ProfileManager`), and `Favorites`. No Minecraft dependency at all — this module would compile against nothing but the JDK and Gson.
 - **`corimlib`** — loader-agnostic *Minecraft-dependent* code: GUI screens, HUD rendering, mixins, and the `PlatformBridge` interface itself. Depends on `common` and Minecraft, but has zero dependency on any loader's API (no Fabric API, no NeoForge/Forge event classes).
-- **`fabric` / `neoforge` / `forge`** — each is a thin wrapper with (mostly) no source of its own. Their only job is bundling `common` + `corimlib` into one standalone, self-contained mod jar (`corimlib-fabric`, `corimlib-neoforge`, `corimlib-forge`) that a depending mod like Crunch can install alongside itself. `neoforge`/`forge` additionally need a trivial no-op `@Mod` entrypoint class, since neither loader allows a mod with zero entrypoints the way Fabric does.
+- **`fabric` / `neoforge` / `forge`** — each is a thin wrapper with (mostly) no source of its own. Their only job is bundling `common` + `corimlib` into one standalone, self-contained mod jar (`corimlib-fabric`, `corimlib-neoforge`, `corimlib-forge`) that a dependent mod can install alongside itself. `neoforge`/`forge` additionally need a trivial no-op `@Mod` entrypoint class, since neither loader allows a mod with zero entrypoints the way Fabric does.
 
-This is *not* the same shape as the mod that consumes CorimLib. Crunch (the real-world consumer) has its own `fabric`/`neoforge`/`forge` modules containing the actual `PlatformBridge` *implementations* (`FabricPlatformBridge`, `NeoForgePlatformBridge`, `ForgePlatformBridge`) — those live in the consuming mod's repo, not in CorimLib. See [PlatformBridge API](platform-bridge.md).
+This is *not* the same shape as a mod that consumes CorimLib. A dependent mod has its own `fabric`/`neoforge`/`forge` modules containing the actual `PlatformBridge` *implementations* (e.g. `FabricPlatformBridge`, `NeoForgePlatformBridge`, `ForgePlatformBridge`) — those live in the consuming mod's own repo, not in CorimLib itself. See [PlatformBridge API](platform-bridge.md).
 
 ## Why no Architectury / no bytecode remapping
 

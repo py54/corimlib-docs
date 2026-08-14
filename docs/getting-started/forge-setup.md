@@ -1,14 +1,14 @@
 # Forge Setup
 
 !!! danger "Higher risk than the other two loaders"
-    Crunch's own `:forge:runClient` currently crashes with a JPMS module-resolution error (`java.lang.module.ResolutionException: Modules crunch and main export package ... to module ...`) that has not been root-caused — it's a ForgeGradle/JPMS module-layer construction issue, not a Minecraft API problem. Forge support is **build-verified only** (compiles, correct metadata, unzipped and checked), not confirmed to actually launch. Treat everything below as correct-as-written but not yet proven at runtime. See [Limitations](../reference/limitations.md).
+    A real dependent mod's `:forge:runClient` currently crashes with a JPMS module-resolution error (`java.lang.module.ResolutionException: Modules crunch and main export package ... to module ...`) that has not been root-caused — it's a ForgeGradle/JPMS module-layer construction issue, not a Minecraft API problem. Forge support is **build-verified only** (compiles, correct metadata, unzipped and checked), not confirmed to actually launch. Treat everything below as correct-as-written but not yet proven at runtime. See [Limitations](../reference/limitations.md).
 
 ## 1. Implement `PlatformBridge`
 
-Forge's event system is genuinely different from NeoForge's despite the shared ancestry — every event type exposes a static `EventType.BUS` field with `.addListener(...)`, no injected mod-event-bus parameter and no mod-bus/game-bus split to worry about for timing. Crunch's real implementation:
+Forge's event system is genuinely different from NeoForge's despite the shared ancestry — every event type exposes a static `EventType.BUS` field with `.addListener(...)`, no injected mod-event-bus parameter and no mod-bus/game-bus split to worry about for timing. A real, production-shipped implementation:
 
 ```java
-package dev.py54.crunch.forge;
+package dev.creator.yourmodname.forge;
 
 import dev.py54.crunch.corimlib.ChatFilter;
 import dev.py54.crunch.corimlib.HudRenderer;
@@ -87,18 +87,20 @@ public final class ForgePlatformBridge implements PlatformBridge {
 }
 ```
 
+The `dev.creator.yourmodname.forge` package is yours to choose — only the `dev.py54.crunch.corimlib.*` imports are CorimLib's actual, fixed API.
+
 !!! note "The cast on `onChatReceived` is required, not stylistic"
     Because both `addListener(Consumer<T>)` and `addListener(Predicate<T>)` overloads exist on `CancellableEventBus`, a plain lambda is ambiguous — you must cast explicitly to `(Predicate<ClientChatReceivedEvent>)`, exactly as shown above, or the build won't compile.
 
 ## 2. Register it via `ServiceLoader`
 
 ```
-dev.py54.crunch.forge.ForgePlatformBridge
+dev.creator.yourmodname.forge.ForgePlatformBridge
 ```
 
 ## 3. `ItemTooltipEvent` has fewer parameters than Fabric/NeoForge
 
-Forge's `ItemTooltipEvent` signature is `(ItemStack, Player, List<Component>, TooltipFlag)` — no `TooltipContext` parameter at all, which is why the real implementation above passes `null` for that argument to `TooltipHandler.onTooltip`. If your own tooltip logic reads the context parameter, it will always be `null` on Forge.
+Forge's `ItemTooltipEvent` signature is `(ItemStack, Player, List<Component>, TooltipFlag)` — no `TooltipContext` parameter at all, which is why the implementation above passes `null` for that argument to `TooltipHandler.onTooltip`. If your own tooltip logic reads the context parameter, it will always be `null` on Forge.
 
 ## 4. Toolchain notes
 

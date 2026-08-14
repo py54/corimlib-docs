@@ -48,7 +48,7 @@ A structured reference of CorimLib's public classes, grouped by module and packa
 |---|---|---|
 | `PlatformBridge` | interface | `loaderName`, `configDir`, `registerKeybind`, `onClientTick`, `onClientStarted`, `registerHudElement`, `onItemTooltip`, `onChatReceived`, `onChatObserved` |
 | `Corim` | final class, static | `bridge()` — lazy `ServiceLoader`-resolved singleton |
-| `CorimPaths` | final class, static | `configDir`, `configFile`, `profilesDir`, `profileExchangeDir` — **hardcoded to Crunch's own filenames**, see [Config System](../core/config-system.md) |
+| `CorimPaths` | final class, static | `configDir`, `configFile`, `profilesDir`, `profileExchangeDir` — **hardcoded to fixed filenames, not parameterized by mod id**, see [Config System](../core/config-system.md) |
 | `CorimKeybinds` | final class, static | `CATEGORY` (namespaced `"crunch"`), `openMenu` |
 | `HudRenderer` | functional interface | `render(GuiGraphicsExtractor, DeltaTracker)` |
 | `TooltipHandler` | functional interface | `onTooltip(ItemStack, Item.TooltipContext, TooltipFlag, List<Component>)` |
@@ -79,7 +79,7 @@ A structured reference of CorimLib's public classes, grouped by module and packa
 
 ### Mixins (`dev.py54.crunch.corimlib.mixin`)
 
-Internal implementation detail — these back specific Crunch features (fullbright's `LightmapRenderStateExtractorMixin`, infinite chat's `ChatHistoryMixin`, scrollable tooltips, zoom-scroll, screenshot organization, weather-effect toggling, the pause-screen menu button, and the version-specific `VanillaHudMixin` covering the `Gui`→`Hud` rename). None are part of a documented extension point — they exist to implement Crunch's own concrete features, not as hooks for third-party mods.
+Internal implementation detail — these back specific shipped features (fullbright's `LightmapRenderStateExtractorMixin`, infinite chat's `ChatHistoryMixin`, scrollable tooltips, zoom-scroll, screenshot organization, weather-effect toggling, the pause-screen menu button, and the version-specific `VanillaHudMixin` covering the `Gui`→`Hud` rename). None are part of a documented extension point — they exist to implement the shipped concrete features, not as hooks for third-party mods.
 
 ## Loader wrapper modules
 

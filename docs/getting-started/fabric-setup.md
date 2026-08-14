@@ -1,13 +1,13 @@
 # Fabric Setup
 
-Fabric is CorimLib's original, most-verified target (`runClient` reaches a loaded world with no crash on both CorimLib and Crunch).
+Fabric is CorimLib's original, most-verified target — `runClient` reaches a loaded world with no crash, both for CorimLib itself and for real dependent mods built on it.
 
 ## 1. Implement `PlatformBridge`
 
-Every loader module provides exactly one implementation of [`PlatformBridge`](../core/platform-bridge.md). This is Crunch's real, shipped Fabric implementation — every method maps to one Fabric API call:
+Every loader module provides exactly one implementation of [`PlatformBridge`](../core/platform-bridge.md). This is a real, production-shipped Fabric implementation — every method maps to one Fabric API call:
 
 ```java
-package dev.py54.crunch.fabric;
+package dev.creator.yourmodname.fabric;
 
 import dev.py54.crunch.corimlib.ChatFilter;
 import dev.py54.crunch.corimlib.HudRenderer;
@@ -78,43 +78,38 @@ public final class FabricPlatformBridge implements PlatformBridge {
 }
 ```
 
-(Only `configDir()`'s folder name — `"mymod"` above vs. Crunch's real `"crunch"` — needs to change for your own mod; everything else is loader glue that stays the same shape.)
+The `dev.creator.yourmodname.fabric` package and `FabricPlatformBridge` class name are yours to choose — only the `dev.py54.crunch.corimlib.*` imports are CorimLib's actual, fixed API. `configDir()`'s folder name is the one value you should change to your own mod id; everything else is loader glue that stays the same shape.
 
 Fabric API dependencies used above: `fabric-key-mapping-api-v1`, `fabric-lifecycle-events-v1`, `fabric-item-api-v1`, `fabric-message-api-v1`, `fabric-rendering-v1` (the `hud` sub-package). All are part of the standard `fabric-api` meta-artifact.
 
 ## 2. Register it via `ServiceLoader`
 
-Create `src/main/resources/META-INF/services/dev.py54.crunch.corimlib.PlatformBridge` containing a single line — the fully-qualified name of your implementation:
+Create `src/main/resources/META-INF/services/dev.py54.crunch.corimlib.PlatformBridge` — the filename is CorimLib's real, fixed interface FQN — containing a single line, the fully-qualified name of *your* implementation:
 
 ```
-dev.py54.crunch.fabric.FabricPlatformBridge
+dev.creator.yourmodname.fabric.FabricPlatformBridge
 ```
-
-This is exactly Crunch's own file content (`fabric/src/main/resources/META-INF/services/dev.py54.crunch.corimlib.PlatformBridge`), just swap the class name for yours.
 
 ## 3. Call your bootstrap from the mod entrypoint
 
-Crunch's real Fabric entrypoint is three lines:
-
 ```java
-package dev.py54.crunch.fabric.client;
+package dev.creator.yourmodname.fabric.client;
 
-import dev.py54.crunch.corimlib.features.CrunchFeatures;
 import net.fabricmc.api.ClientModInitializer;
 
-public final class CrunchClient implements ClientModInitializer {
+public final class MyModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        CrunchFeatures.bootstrap();
+        MyModFeatures.bootstrap();
     }
 }
 ```
 
-`CrunchFeatures.bootstrap()` is Crunch's own feature-registration method — in your own mod, this would be wherever you call `FeatureRegistry.register(...)` for your own [`Feature`s](../core/features-and-settings.md), register your keybinds via `Corim.bridge().registerKeybind(...)`, and register your HUD element via `Corim.bridge().registerHudElement(...)`. Wire it into `fabric.mod.json`'s `"client"` entrypoints list the normal Fabric way.
+`MyModFeatures.bootstrap()` is a method you write yourself — wherever you call `FeatureRegistry.register(...)` for your own [`Feature`s](../core/features-and-settings.md), register your keybinds via `Corim.bridge().registerKeybind(...)`, and register your HUD element via `Corim.bridge().registerHudElement(...)`. Wire the entrypoint class into `fabric.mod.json`'s `"client"` entrypoints list the normal Fabric way.
 
 ## 4. Declare the dependency in `fabric.mod.json`
 
-If you're publishing your own mod that depends on CorimLib as a companion mod (the same relationship Crunch has with it), add it to `depends`:
+If you're publishing your own mod that depends on CorimLib as a companion mod, add it to `depends`:
 
 ```json
 {

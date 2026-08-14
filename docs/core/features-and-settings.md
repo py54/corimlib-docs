@@ -68,7 +68,7 @@ public final class FeatureRegistry {
 }
 ```
 
-Because it's a static singleton, every mod that depends on CorimLib and calls `FeatureRegistry.register(...)` adds to the *same* shared list — including Crunch's own ~60 features, if Crunch happens to be installed alongside your mod. Prefix your feature ids to avoid collisions (Crunch's own convention is `<category>.<name>`, e.g. `hud.fps`, `visual.particles`) — see [Limitations](../reference/limitations.md#global-featureregistry) for the full implication of this.
+Because it's a static singleton, every mod that depends on CorimLib and calls `FeatureRegistry.register(...)` adds to the *same* shared list — including any other CorimLib-dependent mod's features, if one happens to be installed alongside yours. Prefix your feature ids to avoid collisions (a common convention is `<category>.<name>`, e.g. `hud.fps`, `visual.particles`) — see [Limitations](../reference/limitations.md#global-featureregistry) for the full implication of this.
 
 ## `Setting<T>`
 
@@ -147,4 +147,4 @@ verbose.onChange(v -> { /* react to the setting changing independently of the to
 FeatureRegistry.register(myFeature);
 ```
 
-Once registered, your feature is automatically visible in [`CrunchMainScreen`](../gui/gui-and-theming.md) (if the depending mod or Crunch itself opens it), persisted by [`ConfigManager`](config-system.md), and included in [`ProfileManager`](config-system.md) snapshots — you don't build any of that plumbing yourself.
+Once registered, your feature is automatically visible in [`CrunchMainScreen`](../gui/gui-and-theming.md) (if a dependent mod opens it), persisted by [`ConfigManager`](config-system.md), and included in [`ProfileManager`](config-system.md) snapshots — you don't build any of that plumbing yourself.

@@ -65,10 +65,10 @@ Corim.bridge().onClientTick(mc -> { /* every client tick */ });
 
 ## Method-by-method
 
-| Method | Purpose | Real Fabric implementation |
+| Method | Purpose | Example Fabric implementation |
 |---|---|---|
-| `loaderName()` | A human-readable loader name, used in log lines (`"Crunch initialized ({}): ..."`). | Returns the literal string `"Fabric"` / `"NeoForge"` / `"Forge"`. |
-| `configDir()` | Where to read/write your mod's config JSON. | `FabricLoader.getInstance().getConfigDir().resolve("crunch")` |
+| `loaderName()` | A human-readable loader name, useful in log lines (e.g. `"MyMod initialized ({}): ..."`). | Returns the literal string `"Fabric"` / `"NeoForge"` / `"Forge"`. |
+| `configDir()` | Where to read/write your mod's config JSON. | `FabricLoader.getInstance().getConfigDir().resolve("mymod")` |
 | `registerKeybind(KeyMapping)` | Registers a `KeyMapping` with the loader so it appears in the vanilla Controls screen and receives input. | `KeyMappingHelper.registerKeyMapping(mapping)` |
 | `onClientTick(Consumer<Minecraft>)` | Runs every client tick. | `ClientTickEvents.END_CLIENT_TICK.register(callback::accept)` |
 | `onClientStarted(Consumer<Minecraft>)` | Runs once, after the client has fully finished starting. **Load your config here, not at mod-init time** — see the callout below. | `ClientLifecycleEvents.CLIENT_STARTED.register(callback::accept)` |
@@ -78,11 +78,11 @@ Corim.bridge().onClientTick(mc -> { /* every client tick */ });
 | `onChatObserved(Consumer<Component>)` | Runs *after* `onChatReceived`, for read-only reactions (sounds, logging) — the message may already be hidden by that point. | `ClientReceiveMessageEvents.CHAT.register(...)` |
 
 !!! danger "Don't touch `Minecraft.getInstance().options` from an `onToggle`/`onChange` handler without a null guard"
-    `ConfigManager.load()` at entrypoint time fires every `Feature`'s `onToggle`/`Setting`'s `onChange` handler synchronously (via `Feature.setEnabled`), and `Minecraft.getInstance().options` doesn't exist yet at that point. This is exactly why `onClientStarted` exists as a separate hook from mod-init — Crunch's own bootstrap defers `ConfigManager.load(...)` until `Corim.bridge().onClientStarted(...)` fires, specifically because this was found the hard way (see [Limitations](../reference/limitations.md)).
+    `ConfigManager.load()` at entrypoint time fires every `Feature`'s `onToggle`/`Setting`'s `onChange` handler synchronously (via `Feature.setEnabled`), and `Minecraft.getInstance().options` doesn't exist yet at that point. This is exactly why `onClientStarted` exists as a separate hook from mod-init — a correct bootstrap defers `ConfigManager.load(...)` until `Corim.bridge().onClientStarted(...)` fires, specifically because this was found the hard way in production use (see [Limitations](../reference/limitations.md)).
 
-## Real implementations, side by side
+## Example implementations, side by side
 
-CorimLib itself ships **no** `PlatformBridge` implementation — the three real ones live in the consuming mod (Crunch)'s own `fabric`/`neoforge`/`forge` modules. Full, real code for each is on the corresponding setup page:
+CorimLib itself ships **no** `PlatformBridge` implementation — every consuming mod provides its own, in its own `fabric`/`neoforge`/`forge` modules. Full, real, production-grade code for each loader is on the corresponding setup page:
 
 - [Fabric implementation](../getting-started/fabric-setup.md)
 - [NeoForge implementation](../getting-started/neoforge-setup.md) (has the extra mod-bus-event queueing wrinkle)

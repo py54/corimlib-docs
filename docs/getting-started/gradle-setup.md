@@ -14,7 +14,7 @@ CorimLib's Gradle group is `dev.py54.corimlib`. Each module publishes a separate
 There's also a `dev.py54.corimlib:common:1.0.0` artifact (the loader-agnostic `Feature`/`Setting`/`ConfigManager` layer with zero Minecraft dependency), but you generally don't need to depend on it directly — `corimlib` already depends on it and re-exposes its classes.
 
 !!! warning "No public Maven repository yet"
-    As of today, CorimLib's build only publishes to `mavenLocal()` — there is no Modrinth Maven, GitHub Packages, or Maven Central listing. The coordinates above are real (this is exactly what Crunch itself depends on), but to resolve them in your own build you currently need either:
+    As of today, CorimLib's build only publishes to `mavenLocal()` — there is no Modrinth Maven, GitHub Packages, or Maven Central listing. The coordinates above are real (this is exactly what real dependent mods use), but to resolve them in your own build you currently need either:
 
     - Access to the CorimLib source, so you can run `./gradlew publishToMavenLocal` yourself, or
     - The distributable jars placed in a local flat-dir repository (see below).
@@ -36,7 +36,7 @@ There's also a `dev.py54.corimlib:common:1.0.0` artifact (the loader-agnostic `F
 
 ## The compileOnly / implementation split
 
-This is exactly how Crunch's own `fabric/build.gradle` depends on CorimLib — copy this pattern:
+This is exactly how a real, production `fabric/build.gradle` depends on CorimLib — copy this pattern:
 
 ```groovy
 dependencies {

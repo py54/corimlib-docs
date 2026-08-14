@@ -4,11 +4,11 @@ CorimLib has two audiences, and "installing" means something different for each.
 
 ## As a player
 
-If you're installing a mod that *depends on* CorimLib (like Crunch), CorimLib is a required **companion mod** — it is not bundled into the depending mod's jar. Both jars go in your `mods/` folder together:
+If you're installing a mod that *depends on* CorimLib, CorimLib is a required **companion mod** — it is not bundled into the depending mod's jar. Both jars go in your `mods/` folder together:
 
 ```
 mods/
-├── crunch-1.0.0-26.2-fabric.jar
+├── mymod-1.0.0-26.2-fabric.jar
 └── corimlib-fabric-1.0.0.jar
 ```
 

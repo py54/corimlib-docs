@@ -4,10 +4,10 @@ NeoForge is fully verified on Minecraft 26.2 (`runClient` reaches a loaded world
 
 ## 1. Implement `PlatformBridge`
 
-NeoForge's event bus has a wrinkle the other two loaders don't: `RegisterKeyMappingsEvent` and `RegisterGuiLayersEvent` are **mod-bus events that fire once, early** — before your feature-registration code (which is what actually calls `registerKeybind`/`registerHudElement`) has run. Crunch's real implementation queues into static lists and drains them when the event fires:
+NeoForge's event bus has a wrinkle the other two loaders don't: `RegisterKeyMappingsEvent` and `RegisterGuiLayersEvent` are **mod-bus events that fire once, early** — before your feature-registration code (which is what actually calls `registerKeybind`/`registerHudElement`) has run. A correct implementation queues into static lists and drains them when the event fires:
 
 ```java
-package dev.py54.crunch.neoforge;
+package dev.creator.yourmodname.neoforge;
 
 import dev.py54.crunch.corimlib.ChatFilter;
 import dev.py54.crunch.corimlib.HudRenderer;
@@ -103,22 +103,23 @@ public final class NeoForgePlatformBridge implements PlatformBridge {
 }
 ```
 
+The `dev.creator.yourmodname.neoforge` package is yours to choose — only the `dev.py54.crunch.corimlib.*` imports are CorimLib's actual, fixed API.
+
 ## 2. Register it via `ServiceLoader`
 
 Same mechanism as every loader — `META-INF/services/dev.py54.crunch.corimlib.PlatformBridge`:
 
 ```
-dev.py54.crunch.neoforge.NeoForgePlatformBridge
+dev.creator.yourmodname.neoforge.NeoForgePlatformBridge
 ```
 
 ## 3. Wire the mod-bus listeners *before* bootstrapping
 
-This is the part that's easy to get wrong on NeoForge: `RegisterKeyMappingsEvent`/`RegisterGuiLayersEvent` must be registered on the **mod event bus**, and that registration must happen *before* your feature-bootstrap code runs (even though the pending lists are only read once the event actually fires later). Crunch's real `@Mod` entrypoint:
+This is the part that's easy to get wrong on NeoForge: `RegisterKeyMappingsEvent`/`RegisterGuiLayersEvent` must be registered on the **mod event bus**, and that registration must happen *before* your feature-bootstrap code runs (even though the pending lists are only read once the event actually fires later):
 
 ```java
-package dev.py54.crunch.neoforge;
+package dev.creator.yourmodname.neoforge;
 
-import dev.py54.crunch.corimlib.features.CrunchFeatures;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -130,7 +131,7 @@ public final class MyModNeoForge {
         modEventBus.addListener(NeoForgePlatformBridge::onRegisterKeyMappings);
         modEventBus.addListener(NeoForgePlatformBridge::onRegisterGuiLayers);
 
-        CrunchFeatures.bootstrap(); // replace with your own feature-registration entrypoint
+        MyModFeatures.bootstrap(); // your own feature-registration entrypoint
     }
 }
 ```
@@ -140,4 +141,4 @@ public final class MyModNeoForge {
 - `net.neoforged.moddev` Gradle plugin, ModDevGradle's own `jarJar` task is for external Maven artifacts with version ranges, **not** sibling `project()` modules — use the `com.gradleup.shadow` plugin scoped to a dedicated configuration instead if you need to bundle sibling subprojects.
 - `runClient`/mixin resource discovery only looks at sourceSets explicitly listed in `neoForge { mods { "yourmod" { sourceSet(...) } } }`.
 - Add `id "org.gradle.toolchains.foojay-resolver-convention" version "1.0.0"` to your root `settings.gradle` — ModDevGradle's `downloadAssets` task needs an auto-provisioned Java 21 for an internal tool.
-- `neoforge.mods.toml` should be a real Gradle-property-expanded template (a `ProcessResources` task reading from `src/main/templates/`), the same way Crunch's own does — ModDevGradle does not expand tokens in a plain `src/main/resources/neoforge.mods.toml` the way Fabric Loom expands `fabric.mod.json`.
+- `neoforge.mods.toml` should be a real Gradle-property-expanded template (a `ProcessResources` task reading from `src/main/templates/`) — ModDevGradle does not expand tokens in a plain `src/main/resources/neoforge.mods.toml` the way Fabric Loom expands `fabric.mod.json`.

@@ -94,11 +94,11 @@ public final class HudOverlayElement implements HudRenderer {
 }
 ```
 
-Registering it (this is the real, complete call from CorimLib's own bootstrap):
+Registering it:
 
 ```java
 Corim.bridge().registerHudElement(
-        Identifier.fromNamespaceAndPath("crunch", "hud_overlay"),
+        Identifier.fromNamespaceAndPath("mymod", "hud_overlay"),
         new HudOverlayElement());
 ```
 

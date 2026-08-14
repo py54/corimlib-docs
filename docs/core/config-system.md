@@ -32,7 +32,7 @@ If the JSON at `path` fails to parse, `load()` does **not** throw or crash — i
 
 ### Real bootstrap shape
 
-This is (trimmed) exactly how Crunch wires save/load — copy this shape for your own mod:
+This is a real, production-tested wiring shape — copy it for your own mod:
 
 ```java
 Corim.bridge().onClientStarted(mc -> {
@@ -55,8 +55,8 @@ public final class CorimPaths {
 }
 ```
 
-!!! warning "`CorimPaths` is hardcoded to Crunch's own filenames"
-    `configFile()` resolves to `crunch.json` unconditionally — it is not parameterized by mod id. If you're building your own mod on CorimLib (not just adding features that show up inside Crunch's own menu), don't reuse `CorimPaths` directly; call `Corim.bridge().configDir().resolve("yourmod.json")` yourself instead. See [Limitations](../reference/limitations.md).
+!!! warning "`CorimPaths` is hardcoded to a fixed filename, not parameterized by mod id"
+    `configFile()` resolves to the literal filename `crunch.json` unconditionally, regardless of which mod calls it. If you're building your own mod on CorimLib, don't reuse `CorimPaths` directly — it will read/write that one fixed file no matter your mod id; call `Corim.bridge().configDir().resolve("yourmod.json")` yourself instead. See [Limitations](../reference/limitations.md).
 
 ## `ProfileManager`
 

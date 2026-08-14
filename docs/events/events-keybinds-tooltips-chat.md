@@ -30,7 +30,7 @@ public final class CorimKeybinds {
 }
 ```
 
-`CorimKeybinds.CATEGORY` is namespaced `"crunch"` — if you're registering your own mod's keybinds (not just Crunch's), define your own `KeyMapping.Category` under your own namespace rather than reusing this one, since it will group your keybind under a category literally labeled for Crunch's menu in the vanilla Controls screen.
+`CorimKeybinds.CATEGORY` is namespaced `"crunch"` — for your own mod's keybinds, define your own `KeyMapping.Category` under your own namespace rather than reusing this one, since it will group your keybind under a category literally labeled "crunch" in the vanilla Controls screen.
 
 ### Registering a keybind
 
@@ -44,7 +44,7 @@ Corim.bridge().onClientTick(mc -> {
 });
 ```
 
-This is the exact real pattern CorimLib's own bootstrap uses to open `CrunchMainScreen`:
+This is a real, production pattern for opening `CrunchMainScreen`:
 
 ```java
 CorimKeybinds.openMenu = new KeyMapping("key.crunch.open_menu", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K, CorimKeybinds.CATEGORY);
@@ -101,7 +101,7 @@ Corim.bridge().onChatObserved(message -> {
 ```
 
 !!! note "Forge's cancellation mechanism is different under the hood"
-    On Forge, `ClientChatReceivedEvent.BUS` is a `CancellableEventBus` — there's no `event.setCanceled(boolean)` to call from a plain listener. The real `ForgePlatformBridge` implementation registers via the `addListener(Predicate<T>)` overload instead, where returning `true` cancels the event, and casts the lambda explicitly (`(Predicate<ClientChatReceivedEvent>) event -> !filter.test(event.getMessage())`) because the ambiguous overload won't otherwise compile. You don't need to know this to *call* `ChatFilter` — it's already handled inside the bridge implementation — but it explains why Forge's chat handling code looks different from Fabric's/NeoForge's if you go reading the source.
+    On Forge, `ClientChatReceivedEvent.BUS` is a `CancellableEventBus` — there's no `event.setCanceled(boolean)` to call from a plain listener. A correct `ForgePlatformBridge` implementation registers via the `addListener(Predicate<T>)` overload instead, where returning `true` cancels the event, and casts the lambda explicitly (`(Predicate<ClientChatReceivedEvent>) event -> !filter.test(event.getMessage())`) because the ambiguous overload won't otherwise compile. You don't need to know this to *call* `ChatFilter` — it's already handled inside the bridge implementation — but it explains why Forge's chat handling code looks different from Fabric's/NeoForge's if you go reading the source.
 
 ## HUD elements
 
