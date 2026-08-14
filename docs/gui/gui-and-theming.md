@@ -4,7 +4,7 @@ CorimLib ships a complete, working dark-modal-card GUI as five real `Screen` cla
 
 ## The five screens (public, reusable as-is)
 
-All in package `dev.py54.crunch.corimlib.gui`, all `public class ... extends Screen` with real public constructors:
+All in package `dev.py54.corimlib.gui`, all `public class ... extends Screen` with real public constructors:
 
 | Class | Constructor | What it shows |
 |---|---|---|
@@ -37,7 +37,7 @@ final class CrunchButtonWidget { /* package-private */ }
 final class CrunchSliderWidget { /* package-private */ }
 ```
 
-They live in `dev.py54.crunch.corimlib.gui` — a package your own mod's code is not part of — so `CrunchTheme.panel(...)`, `CrunchTheme.card(...)`, `new CrunchButtonWidget(...)`, etc. **will not compile** from outside CorimLib itself, regardless of what version of the jar you're compiling against. This is why the five screens above are documented as "use as-is," not "use as a component toolkit" — the dark chamfered-corner panel look, the custom-drawn buttons, and the custom-drawn sliders exist, and they're exactly what gives these screens their visual identity, but they are internal implementation detail today, not a published widget library.
+They live in `dev.py54.corimlib.gui` — a package your own mod's code is not part of — so `CrunchTheme.panel(...)`, `CrunchTheme.card(...)`, `new CrunchButtonWidget(...)`, etc. **will not compile** from outside CorimLib itself, regardless of what version of the jar you're compiling against. This is why the five screens above are documented as "use as-is," not "use as a component toolkit" — the dark chamfered-corner panel look, the custom-drawn buttons, and the custom-drawn sliders exist, and they're exactly what gives these screens their visual identity, but they are internal implementation detail today, not a published widget library.
 
 If you want your own screen to visually match, your only real option right now is reading the actual source for reference and reimplementing the same drawing calls in your own package — `CrunchTheme`'s real methods (`panel`, `card`, `chamferedRect`, `backdrop`, `diamond`, `gearIcon`, `isOver`) are all built from plain `GuiGraphicsExtractor.fill(...)` calls, since 26.2's GUI API has no native rounded-rect fill.
 

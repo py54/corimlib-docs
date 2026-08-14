@@ -9,10 +9,10 @@ Every loader module provides exactly one implementation of [`PlatformBridge`](..
 ```java
 package dev.creator.yourmodname.fabric;
 
-import dev.py54.crunch.corimlib.ChatFilter;
-import dev.py54.crunch.corimlib.HudRenderer;
-import dev.py54.crunch.corimlib.PlatformBridge;
-import dev.py54.crunch.corimlib.TooltipHandler;
+import dev.py54.corimlib.ChatFilter;
+import dev.py54.corimlib.HudRenderer;
+import dev.py54.corimlib.PlatformBridge;
+import dev.py54.corimlib.TooltipHandler;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -78,13 +78,13 @@ public final class FabricPlatformBridge implements PlatformBridge {
 }
 ```
 
-The `dev.creator.yourmodname.fabric` package and `FabricPlatformBridge` class name are yours to choose — only the `dev.py54.crunch.corimlib.*` imports are CorimLib's actual, fixed API. `configDir()`'s folder name is the one value you should change to your own mod id; everything else is loader glue that stays the same shape.
+The `dev.creator.yourmodname.fabric` package and `FabricPlatformBridge` class name are yours to choose — only the `dev.py54.corimlib.*` imports are CorimLib's actual, fixed API. `configDir()`'s folder name is the one value you should change to your own mod id; everything else is loader glue that stays the same shape.
 
 Fabric API dependencies used above: `fabric-key-mapping-api-v1`, `fabric-lifecycle-events-v1`, `fabric-item-api-v1`, `fabric-message-api-v1`, `fabric-rendering-v1` (the `hud` sub-package). All are part of the standard `fabric-api` meta-artifact.
 
 ## 2. Register it via `ServiceLoader`
 
-Create `src/main/resources/META-INF/services/dev.py54.crunch.corimlib.PlatformBridge` — the filename is CorimLib's real, fixed interface FQN — containing a single line, the fully-qualified name of *your* implementation:
+Create `src/main/resources/META-INF/services/dev.py54.corimlib.PlatformBridge` — the filename is CorimLib's real, fixed interface FQN — containing a single line, the fully-qualified name of *your* implementation:
 
 ```
 dev.creator.yourmodname.fabric.FabricPlatformBridge

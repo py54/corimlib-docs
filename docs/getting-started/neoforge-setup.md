@@ -9,10 +9,10 @@ NeoForge's event bus has a wrinkle the other two loaders don't: `RegisterKeyMapp
 ```java
 package dev.creator.yourmodname.neoforge;
 
-import dev.py54.crunch.corimlib.ChatFilter;
-import dev.py54.crunch.corimlib.HudRenderer;
-import dev.py54.crunch.corimlib.PlatformBridge;
-import dev.py54.crunch.corimlib.TooltipHandler;
+import dev.py54.corimlib.ChatFilter;
+import dev.py54.corimlib.HudRenderer;
+import dev.py54.corimlib.PlatformBridge;
+import dev.py54.corimlib.TooltipHandler;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -103,11 +103,11 @@ public final class NeoForgePlatformBridge implements PlatformBridge {
 }
 ```
 
-The `dev.creator.yourmodname.neoforge` package is yours to choose — only the `dev.py54.crunch.corimlib.*` imports are CorimLib's actual, fixed API.
+The `dev.creator.yourmodname.neoforge` package is yours to choose — only the `dev.py54.corimlib.*` imports are CorimLib's actual, fixed API.
 
 ## 2. Register it via `ServiceLoader`
 
-Same mechanism as every loader — `META-INF/services/dev.py54.crunch.corimlib.PlatformBridge`:
+Same mechanism as every loader — `META-INF/services/dev.py54.corimlib.PlatformBridge`:
 
 ```
 dev.creator.yourmodname.neoforge.NeoForgePlatformBridge

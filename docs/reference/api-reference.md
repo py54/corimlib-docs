@@ -4,7 +4,7 @@ A structured reference of CorimLib's public classes, grouped by module and packa
 
 ## `common` module — zero Minecraft dependency
 
-### `dev.py54.crunch.feature`
+### `dev.py54.corimlib.feature`
 
 | Class | Kind | Key members |
 |---|---|---|
@@ -13,7 +13,7 @@ A structured reference of CorimLib's public classes, grouped by module and packa
 | `FeatureRegistry` | final class, static | `register`, `get`, `all`, `byCategory`, `search`, `resetAll` |
 | `Favorites` | final class, static | `isFavorite`, `toggleFavorite`, `favoriteIds`, `markRecentlyUsed`, `recentIds`, `setFavoriteIds`, `setRecentIds` |
 
-### `dev.py54.crunch.settings`
+### `dev.py54.corimlib.settings`
 
 | Class | Kind | Key members |
 |---|---|---|
@@ -27,14 +27,14 @@ A structured reference of CorimLib's public classes, grouped by module and packa
 | `KeybindSetting` | class extends `Setting<Integer>` | GLFW key code, `-1` = unbound |
 | `TextSetting` | class extends `Setting<String>` | + `maxLength()` |
 
-### `dev.py54.crunch.config`
+### `dev.py54.corimlib.config`
 
 | Class | Kind | Key members |
 |---|---|---|
 | `ConfigManager` | final class, static | `toJson`, `applyJson`, `save(Path)`, `load(Path)` |
 | `ConfigException` | class extends `RuntimeException` | thrown by `ConfigManager.save`/`ProfileManager` on I/O failure |
 
-### `dev.py54.crunch.profile`
+### `dev.py54.corimlib.profile`
 
 | Class | Kind | Key members |
 |---|---|---|
@@ -42,7 +42,7 @@ A structured reference of CorimLib's public classes, grouped by module and packa
 
 ## `corimlib` module — Minecraft-dependent, zero loader-API dependency
 
-### `dev.py54.crunch.corimlib`
+### `dev.py54.corimlib`
 
 | Class | Kind | Key members |
 |---|---|---|
@@ -54,7 +54,7 @@ A structured reference of CorimLib's public classes, grouped by module and packa
 | `TooltipHandler` | functional interface | `onTooltip(ItemStack, Item.TooltipContext, TooltipFlag, List<Component>)` |
 | `ChatFilter` | functional interface | `test(Component) -> boolean` |
 
-### `dev.py54.crunch.corimlib.hud`
+### `dev.py54.corimlib.hud`
 
 | Class | Kind | Key members |
 |---|---|---|
@@ -63,7 +63,7 @@ A structured reference of CorimLib's public classes, grouped by module and packa
 | `HudOverlayElement` | final class implements `HudRenderer` | `editorOpen` (static), `render` |
 | `FrameStats` | class | `onFrame()`, `fps()` |
 
-### `dev.py54.crunch.corimlib.gui` — see [GUI & Theming](../gui/gui-and-theming.md) for the public/internal distinction
+### `dev.py54.corimlib.gui` — see [GUI & Theming](../gui/gui-and-theming.md) for the public/internal distinction
 
 | Class | Visibility | Notes |
 |---|---|---|
@@ -77,7 +77,7 @@ A structured reference of CorimLib's public classes, grouped by module and packa
 | `CrunchButtonWidget` | package-private | **not usable outside CorimLib's own package** |
 | `CrunchSliderWidget` | package-private | **not usable outside CorimLib's own package** |
 
-### Mixins (`dev.py54.crunch.corimlib.mixin`)
+### Mixins (`dev.py54.corimlib.mixin`)
 
 Internal implementation detail — these back specific shipped features (fullbright's `LightmapRenderStateExtractorMixin`, infinite chat's `ChatHistoryMixin`, scrollable tooltips, zoom-scroll, screenshot organization, weather-effect toggling, the pause-screen menu button, and the version-specific `VanillaHudMixin` covering the `Gui`→`Hud` rename). None are part of a documented extension point — they exist to implement the shipped concrete features, not as hooks for third-party mods.
 

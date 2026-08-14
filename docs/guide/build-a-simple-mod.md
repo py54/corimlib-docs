@@ -16,7 +16,7 @@ compassmod/
     │       └── FabricPlatformBridge.java
     └── resources/
         ├── fabric.mod.json
-        └── META-INF/services/dev.py54.crunch.corimlib.PlatformBridge
+        └── META-INF/services/dev.py54.corimlib.PlatformBridge
 ```
 
 ## 2. Gradle dependency
@@ -39,12 +39,12 @@ dependencies {
 ```java
 package dev.example.compassmod;
 
-import dev.py54.crunch.config.ConfigManager;
-import dev.py54.crunch.corimlib.Corim;
-import dev.py54.crunch.corimlib.CorimKeybinds;
-import dev.py54.crunch.corimlib.gui.CrunchMainScreen;
-import dev.py54.crunch.corimlib.hud.HudLineFeature;
-import dev.py54.crunch.corimlib.hud.HudOverlayElement;
+import dev.py54.corimlib.config.ConfigManager;
+import dev.py54.corimlib.Corim;
+import dev.py54.corimlib.CorimKeybinds;
+import dev.py54.corimlib.gui.CrunchMainScreen;
+import dev.py54.corimlib.hud.HudLineFeature;
+import dev.py54.corimlib.hud.HudOverlayElement;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -109,10 +109,10 @@ public final class CompassFeatures {
 ```java
 package dev.example.compassmod.fabric;
 
-import dev.py54.crunch.corimlib.ChatFilter;
-import dev.py54.crunch.corimlib.HudRenderer;
-import dev.py54.crunch.corimlib.PlatformBridge;
-import dev.py54.crunch.corimlib.TooltipHandler;
+import dev.py54.corimlib.ChatFilter;
+import dev.py54.corimlib.HudRenderer;
+import dev.py54.corimlib.PlatformBridge;
+import dev.py54.corimlib.TooltipHandler;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -177,7 +177,7 @@ public final class FabricPlatformBridge implements PlatformBridge {
 }
 ```
 
-`src/main/resources/META-INF/services/dev.py54.crunch.corimlib.PlatformBridge`:
+`src/main/resources/META-INF/services/dev.py54.corimlib.PlatformBridge`:
 
 ```
 dev.example.compassmod.fabric.FabricPlatformBridge

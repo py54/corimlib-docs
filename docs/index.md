@@ -31,10 +31,10 @@ Corim.bridge().onClientTick(mc -> { /* ... */ });
 A minimal feature registration, using only real CorimLib/common classes:
 
 ```java
-import dev.py54.crunch.feature.Category;
-import dev.py54.crunch.feature.Feature;
-import dev.py54.crunch.feature.FeatureRegistry;
-import dev.py54.crunch.settings.BooleanSetting;
+import dev.py54.corimlib.feature.Category;
+import dev.py54.corimlib.feature.Feature;
+import dev.py54.corimlib.feature.FeatureRegistry;
+import dev.py54.corimlib.settings.BooleanSetting;
 
 Feature myFeature = new Feature(
         "mymod.example", "Example Feature",

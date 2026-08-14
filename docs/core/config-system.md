@@ -2,7 +2,7 @@
 
 ## `ConfigManager`
 
-`dev.py54.crunch.config.ConfigManager` (in `common`, package `dev.py54.crunch.config`) serializes the *entire* `FeatureRegistry` — every registered feature's enabled state and every setting's value, plus `Favorites`' favorite/recent lists — to and from a single JSON file via Gson.
+`dev.py54.corimlib.config.ConfigManager` (in `common`, package `dev.py54.corimlib.config`) serializes the *entire* `FeatureRegistry` — every registered feature's enabled state and every setting's value, plus `Favorites`' favorite/recent lists — to and from a single JSON file via Gson.
 
 ```java
 public final class ConfigManager {

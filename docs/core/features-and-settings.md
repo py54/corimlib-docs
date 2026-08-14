@@ -1,6 +1,6 @@
 # Features & Settings
 
-The `Feature`/`Setting`/`FeatureRegistry` classes live in the `common` module (`dev.py54.crunch.feature` and `dev.py54.crunch.settings` packages) and have **zero Minecraft dependency** — this is the one part of CorimLib you could theoretically use outside a Minecraft context entirely.
+The `Feature`/`Setting`/`FeatureRegistry` classes live in the `common` module (`dev.py54.corimlib.feature` and `dev.py54.corimlib.settings` packages) and have **zero Minecraft dependency** — this is the one part of CorimLib you could theoretically use outside a Minecraft context entirely.
 
 ## `Feature`
 
@@ -92,7 +92,7 @@ public abstract class Setting<T> {
 
 ## The seven concrete setting types
 
-All in package `dev.py54.crunch.settings`:
+All in package `dev.py54.corimlib.settings`:
 
 | Class | Value type | Extra fields | Notes |
 |---|---|---|---|

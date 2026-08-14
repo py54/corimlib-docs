@@ -6,12 +6,12 @@ CorimLib's Gradle group is `dev.py54.corimlib`. Each module publishes a separate
 
 | Artifact | Module | What it is |
 |---|---|---|
-| `dev.py54.corimlib:corimlib:1.0.0` | `corimlib/` | Plain classes jar — compile against this. No Minecraft loader API, but does depend on Minecraft itself and `common`. |
-| `dev.py54.corimlib:corimlib-fabric:1.0.0` | `fabric/` | The real, deployable Fabric mod jar (jar-in-jar bundles `common` + `corimlib`). |
-| `dev.py54.corimlib:corimlib-neoforge:1.0.0` | `neoforge/` | The real, deployable NeoForge mod jar (shadowJar bundles `common` + `corimlib`). |
-| `dev.py54.corimlib:corimlib-forge:1.0.0` | `forge/` | The real, deployable Forge mod jar (shadowJar bundles `common` + `corimlib`). |
+| `dev.py54.corimlib:corimlib:1.0.1` | `corimlib/` | Plain classes jar — compile against this. No Minecraft loader API, but does depend on Minecraft itself and `common`. |
+| `dev.py54.corimlib:corimlib-fabric:1.0.1` | `fabric/` | The real, deployable Fabric mod jar (jar-in-jar bundles `common` + `corimlib`). |
+| `dev.py54.corimlib:corimlib-neoforge:1.0.1` | `neoforge/` | The real, deployable NeoForge mod jar (shadowJar bundles `common` + `corimlib`). |
+| `dev.py54.corimlib:corimlib-forge:1.0.1` | `forge/` | The real, deployable Forge mod jar (shadowJar bundles `common` + `corimlib`). |
 
-There's also a `dev.py54.corimlib:common:1.0.0` artifact (the loader-agnostic `Feature`/`Setting`/`ConfigManager` layer with zero Minecraft dependency), but you generally don't need to depend on it directly — `corimlib` already depends on it and re-exposes its classes.
+There's also a `dev.py54.corimlib:common:1.0.1` artifact (the loader-agnostic `Feature`/`Setting`/`ConfigManager` layer with zero Minecraft dependency), but you generally don't need to depend on it directly — `corimlib` already depends on it and re-exposes its classes.
 
 !!! warning "No public Maven repository yet"
     As of today, CorimLib's build only publishes to `mavenLocal()` — there is no Modrinth Maven, GitHub Packages, or Maven Central listing. The coordinates above are real (this is exactly what real dependent mods use), but to resolve them in your own build you currently need either:
@@ -24,13 +24,13 @@ There's also a `dev.py54.corimlib:common:1.0.0` artifact (the loader-agnostic `F
     ```groovy
     repositories {
         flatDir {
-            dirs "libs" // put corimlib-1.0.0.jar and corimlib-fabric-1.0.0.jar here
+            dirs "libs" // put corimlib-1.0.1.jar and corimlib-fabric-1.0.1.jar here
         }
     }
 
     dependencies {
-        compileOnly "dev.py54.corimlib:corimlib:1.0.0"
-        implementation "dev.py54.corimlib:corimlib-fabric:1.0.0"
+        compileOnly "dev.py54.corimlib:corimlib:1.0.1"
+        implementation "dev.py54.corimlib:corimlib-fabric:1.0.1"
     }
     ```
 

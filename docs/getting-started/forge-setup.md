@@ -10,10 +10,10 @@ Forge's event system is genuinely different from NeoForge's despite the shared a
 ```java
 package dev.creator.yourmodname.forge;
 
-import dev.py54.crunch.corimlib.ChatFilter;
-import dev.py54.crunch.corimlib.HudRenderer;
-import dev.py54.crunch.corimlib.PlatformBridge;
-import dev.py54.crunch.corimlib.TooltipHandler;
+import dev.py54.corimlib.ChatFilter;
+import dev.py54.corimlib.HudRenderer;
+import dev.py54.corimlib.PlatformBridge;
+import dev.py54.corimlib.TooltipHandler;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -87,7 +87,7 @@ public final class ForgePlatformBridge implements PlatformBridge {
 }
 ```
 
-The `dev.creator.yourmodname.forge` package is yours to choose — only the `dev.py54.crunch.corimlib.*` imports are CorimLib's actual, fixed API.
+The `dev.creator.yourmodname.forge` package is yours to choose — only the `dev.py54.corimlib.*` imports are CorimLib's actual, fixed API.
 
 !!! note "The cast on `onChatReceived` is required, not stylistic"
     Because both `addListener(Consumer<T>)` and `addListener(Predicate<T>)` overloads exist on `CancellableEventBus`, a plain lambda is ambiguous — you must cast explicitly to `(Predicate<ClientChatReceivedEvent>)`, exactly as shown above, or the build won't compile.

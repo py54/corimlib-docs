@@ -1,13 +1,13 @@
 # PlatformBridge API
 
-`PlatformBridge` (package `dev.py54.crunch.corimlib`) is everything CorimLib's shared feature/GUI code needs from a specific loader. Each loader module provides exactly one implementation, registered via `META-INF/services/dev.py54.crunch.corimlib.PlatformBridge`, so feature code in `corimlib` never imports a Fabric/NeoForge/Forge API directly.
+`PlatformBridge` (package `dev.py54.corimlib`) is everything CorimLib's shared feature/GUI code needs from a specific loader. Each loader module provides exactly one implementation, registered via `META-INF/services/dev.py54.corimlib.PlatformBridge`, so feature code in `corimlib` never imports a Fabric/NeoForge/Forge API directly.
 
 ## The interface
 
 This is the complete, real interface:
 
 ```java
-package dev.py54.crunch.corimlib;
+package dev.py54.corimlib;
 
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -44,7 +44,7 @@ public interface PlatformBridge {
 ## `Corim.bridge()`
 
 ```java
-package dev.py54.crunch.corimlib;
+package dev.py54.corimlib;
 
 import java.util.ServiceLoader;
 

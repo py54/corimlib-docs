@@ -38,7 +38,7 @@ Shared code in `corimlib` never imports a Fabric/NeoForge/Forge class directly. 
 Corim.bridge().registerKeybind(myKeyMapping);
 ```
 
-`Corim.bridge()` resolves to whichever `PlatformBridge` implementation is present on the classpath, found via `java.util.ServiceLoader` reading `META-INF/services/dev.py54.crunch.corimlib.PlatformBridge`. Each loader module ships exactly one implementation and exactly one service-registration file. See [PlatformBridge API](platform-bridge.md) for the full mechanism, including a real limitation of this design worth knowing about before you rely on it — [Limitations](../reference/limitations.md#single-global-platformbridge-singleton).
+`Corim.bridge()` resolves to whichever `PlatformBridge` implementation is present on the classpath, found via `java.util.ServiceLoader` reading `META-INF/services/dev.py54.corimlib.PlatformBridge`. Each loader module ships exactly one implementation and exactly one service-registration file. See [PlatformBridge API](platform-bridge.md) for the full mechanism, including a real limitation of this design worth knowing about before you rely on it — [Limitations](../reference/limitations.md#single-global-platformbridge-singleton).
 
 ## Multi-version support
 

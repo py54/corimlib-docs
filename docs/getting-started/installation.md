@@ -9,7 +9,7 @@ If you're installing a mod that *depends on* CorimLib, CorimLib is a required **
 ```
 mods/
 ├── mymod-1.0.0-26.2-fabric.jar
-└── corimlib-fabric-1.0.0.jar
+└── corimlib-fabric-1.0.1.jar
 ```
 
 The dependent mod's loader metadata declares CorimLib as a hard dependency (e.g. Fabric's `fabric.mod.json` has `"corimlib": ">=1.0.0"` under `depends`), so Fabric Loader / NeoForge / Forge will refuse to load without it, rather than silently crashing later.
